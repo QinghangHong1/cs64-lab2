@@ -61,20 +61,22 @@ int unsignedBits6through9(int v)
 int signedBits0through5(int v)
 {
 	// return the signed value in bits 0 through 5
-	return v;
+	return (v << 26) >> 26;
 }
 
 int signedBits6through9(int v)
 {
 	// return the signed value in bits 6 through 9
-	return v;
+	return (v << 22 >> 28);
 }
 
 int setBits4through9(int v, int setValue)
 {
 	// set bits 4 through 9 in v to become setValue
+	setValue = unsignedBits0through5(setValue) << 4;
+	v = v & ~(63 << 4);
+	return v + setValue;
 	
-	return v;
 }
 
 
